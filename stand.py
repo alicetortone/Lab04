@@ -6,6 +6,11 @@ class Standard:
         self.prezzo = float(prezzo)
         self.espositore = None
 
+    def __eq__(self, other):
+        if isinstance(other, Standard):
+            return self.codice == other.codice
+        return False
+
     def __lt__(self, other):
         return self.prezzo < other.prezzo
 
@@ -27,7 +32,7 @@ class Premium(Standard):
             stato = "Disponibile"
         else:
             stato = "Occupato"
-        return f"{self.codice}: Premium | {self.superficie} mq - Padiglione {self.padiglione} - Prezzo {self.prezzo:.2f}€ - Posizione {self.posizione} - {stato}"
+        return f"{self.codice}: Premium | {self.superficie} mq - Padiglione {self.padiglione} - Prezzo {self.prezzo:.2f}€ - Posizione: {self.posizione} - {stato}"
 
 class Prese(Standard):
     def __init__(self, codice, superficie, padiglione, prezzo, n_prese):
@@ -40,6 +45,6 @@ class Prese(Standard):
             stato = "Disponibile"
         else:
             stato = "Occupato"
-        return f"{self.codice}: Prese Extra | {self.superficie} mq - Padiglione {self.padiglione} - Prezzo {self.prezzo:.2f}€ - Numero prese {self.n_prese} - {stato}"
+        return f"{self.codice}: Prese Extra | {self.superficie} mq - Padiglione {self.padiglione} - Prezzo {self.prezzo:.2f}€ - Prese aggiuntive: {self.n_prese} - {stato}"
 
 
